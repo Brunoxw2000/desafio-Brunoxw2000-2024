@@ -102,11 +102,64 @@ class RecintosZoo {
     }
 
     analisaRecintos(animal, quantidade) {
-        for (const regra in recintos) {
-            for (const element in regra) {
-                console.log(element);
-            }
+        let resposta = []
+
+        let animal_obj = this.get_animal(animal)
+        if (animal_obj === null) {
+            return {erro: "Animal inválido"}
         }
+        if(quantidade < 1 ){
+            return {erro: "Quantidade invalida"}
+        }
+        this.recintos_list.forEach(recinto => {
+
+            let multiplas_especies = 0
+            recinto.animais_existentes_tipo.forEach(animal_acomodado =>
+            {
+
+                if (animal_obj.nome === "HIPPOPOTAMO" && animal_acomodado !== "HIPPOPOTAMO" && recinto.bioma !== "savana e rio")
+                    return;
+
+                if (animal_obj.nome === "MACACO" && animal_acomodado === null)
+                    return;
+
+                if ((animal_obj.carnivoro === 'sim') && (animal_acomodado !== animal_obj.nome))
+                    return;
+
+                if (animal_obj.nome !== animal_acomodado)
+                    multiplas_especies = 1
+            })
+
+            let tamanho_lote = (parseInt(animal_obj.tamanho) * quantidade)+1
+
+            if (parseInt(recinto.tamanho) > tamanho_lote)
+                return;
+
+
+            // Criar metodo depois para printar resultado
+            resposta.push(recinto)
+        })
+
+    }
+
+    get_carnivoro_no_recinto(recinto){
+        if(recinto.animais_existentes_tipo.length === 1){
+            this.animais_list.forEach(animal => {
+                if (animal.nome === recinto.animais_existentes_tipo[0] && animal.carnivoro === 'sim') {
+                    return animal.nome
+                }
+            })
+        }
+        return null
+    }
+
+    get_animal(nome){
+        this.animais_list.forEach(element => {
+            if (nome === element.nome ){
+                return element;
+            }
+        })
+        return null;
     }
 
     printa_todos(){
@@ -119,6 +172,7 @@ class RecintosZoo {
             console.log("----------------------")
         })
     }
+
 
 }
 
