@@ -1,3 +1,6 @@
+import {Recinto} from "./recinto.js";
+import {Animal} from "./animal.js";
+
 const recintos = {
     1: {
         numero: '1',
@@ -85,14 +88,17 @@ const animais = {
 class RecintosZoo {
 
     constructor() {
-        console.log(recintos)
-        // console.log(recintos['1']['numero'])
-        for (const regra in recintos) {
-            // console.log(regra['bioma'])
-            for (const element in recintos[regra]) {
-                console.log(element + ': ' + recintos[regra][element]);
-            }
+        this.recintos_list = []
+        this.animais_list = []
+
+        for (const recinto in recintos) {
+            this.recintos_list.push(new Recinto(recintos[recinto]))
         }
+
+        for (const animal in animais) {
+            this.animais_list.push(new Animal(animais[animal]))
+        }
+
     }
 
     analisaRecintos(animal, quantidade) {
@@ -101,6 +107,17 @@ class RecintosZoo {
                 console.log(element);
             }
         }
+    }
+
+    printa_todos(){
+        this.recintos_list.forEach(recinto => {
+            recinto.printa_recinto()
+            console.log("---------------------")
+        })
+        this.animais_list.forEach(animal => {
+            animal.printa_animal()
+            console.log("----------------------")
+        })
     }
 
 }

@@ -23,7 +23,6 @@ class Recinto {
     print_animais_existentes() {
         for (let i = 0; i < this.animais_existentes_numero.length; i++) {
             console.log('Animal: ' + this.animais_existentes_tipo[i] + ' Numero: ' + this.animais_existentes_numero[i]);
-            console.log();
         }
     }
 
