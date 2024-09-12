@@ -1,8 +1,5 @@
-import {RecintosZoo,recintos} from "./recintos-zoo.js";
-import {Recinto} from "./recinto.js";
+import {RecintosZoo} from "./recintos-zoo.js";
 
-
-const resultado = new RecintosZoo()
-resultado.printa_todos()
+console.log(new RecintosZoo().analisaRecintos("HIPOPOTAMO", 2))
 
 

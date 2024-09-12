@@ -26,6 +26,7 @@ class Animal{
         console.log('Bioma: ' + this.bioma.join(', '))
     }
 
+
 }
 
 export {Animal as Animal};
